@@ -1,40 +1,32 @@
-package com.tazmans_android.androidmytodo
+package com.tazmans_android.androidmytodo.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.tazmans_android.androidmytodo.R
 import com.tazmans_android.androidmytodo.databinding.TodoItemBinding
+import com.tazmans_android.androidmytodo.entities.NoteItem
 
 
 class TodoListAdapter: RecyclerView.Adapter<TodoListAdapter.ViewHolder>() {
-    val data = mutableListOf<String>("Test")
+    val data = mutableListOf<NoteItem>(NoteItem("test", "test3222"))
 
-    /**
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder)
-     * это по сути наш class Item
-     */
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         private val binding = TodoItemBinding.bind(view)
 
-        fun setData(bindData : String) = with(binding) {
-            tvText.text = bindData
+        fun setData(noteItem: NoteItem) = with(binding) {
+            tvText.text = noteItem.title
         }
     }
 
-    // Create new views (invoked by the layout manager) создание нового элемента на основе класса ViewHolder
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        // Create a new view, which defines the UI of the list item
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.todo_item, viewGroup, false)
 
         return ViewHolder(view)
     }
 
-    // Replace the contents of a view (invoked by the layout manager) наполнение элемента
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
         viewHolder.setData(data[position])
     }
 
@@ -43,7 +35,7 @@ class TodoListAdapter: RecyclerView.Adapter<TodoListAdapter.ViewHolder>() {
     }
 
     fun addNewItem(text: String) {
-        data.add(text)
+        data.add(NoteItem(text, text))
         notifyDataSetChanged()
     }
 }
