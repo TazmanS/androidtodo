@@ -33,9 +33,4 @@ class TodoListAdapter: RecyclerView.Adapter<TodoListAdapter.ViewHolder>() {
     override fun getItemCount(): Int {
         return data.size
     }
-
-    fun addNewItem(text: String) {
-        data.add(NoteItem(text, text))
-        notifyDataSetChanged()
-    }
 }
